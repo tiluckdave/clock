@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: consolas;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #040615;
+            overflow: hidden;
+        }
+
+        .clock {
+            width: 350px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 8px solid #fff;
+            border-radius: 50%;
+        }
+
+        .clock::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #2196f3;
+            z-index: 10000;
+            border-radius: 50%;
+        }
+
+        .hour,
+        .min,
+        .sec {
+            position: absolute;
+        }
+
+        .hour,
+        .hr {
+            width: 200px;
+            height: 200px;
+        }
+
+        .min,
+        .mn {
+            width: 230px;
+            height: 230px;
+        }
+
+        .sec,
+        .sc {
+            width: 250px;
+            height: 250px;
+        }
+
+        .hr,
+        .mn,
+        .sc {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+        }
+
+        .hr::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 100px;
+            background: #fff;
+        }
+
+        .mn::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 110px;
+            background: #fff;
+        }
+
+        .sc::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 120px;
+            background: #2196f3;
+        }
+
+        #digitalClock {
+            display: flex;
+            color: #fff;
+            font-size: 4em;
+            margin-top: 20px;
+        }
+
+        #seconds {
+            color: #2196f3;
+        } 
+    </style>
+    <title>Clock</title>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+
+    <div id="digitalClock">
+        <div id="hour"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+        <div id="ampm"></div>
+    </div>
+    <script>
+        const hr = document.querySelector('#hr');
+const mn = document.querySelector('#mn');
+const sc = document.querySelector('#sc');
+
+setInterval(() => {
+    let now = new Date();
+    let hh = now.getHours();
+    let mm = now.getMinutes();
+    let ss = now.getSeconds();
+
+    hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+    mn.style.transform = `rotateZ(${mm}deg)`;
+    sc.style.transform = `rotateZ(${ss}deg)`; 
+    
+    let hour = document.querySelector('#hour');
+    let minutes = document.querySelector('#minutes');
+    let seconds = document.querySelector('#seconds');
+    let ampm = document.querySelector('#ampm');
+
+    if (hh > 12) {
+        ampm.innerHTML = 'PM';
+    } else {
+        ampm.innerHTML = 'AM';
+    }
+
+    let h = (hh < 10) ? "0" + hh : hh
+    let m = (mm < 10) ? "0" + mm : mm
+    let s = (ss < 10) ? "0" + ss : ss
+
+    hour.innerHTML = h + ":";
+    minutes.innerHTML = m + ":";
+    seconds.innerHTML = s + "&nbsp;";
+}, 1000);
+    </script>
+</body>
+
+</html>
