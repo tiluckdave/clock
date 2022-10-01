@@ -142,9 +142,10 @@ setInterval(() => {
     let mm = now.getMinutes();
     let ss = now.getSeconds();
 
-    hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
-    mn.style.transform = `rotateZ(${mm}deg)`;
-    sc.style.transform = `rotateZ(${ss}deg)`; 
+    hr.style.transform = `rotateZ(${hh * 30 + (mm/2)}deg)`;
+    mn.style.transform = `rotateZ(${mm * 6 + (s/10)}deg)`;
+    sc.style.transform = `rotateZ(${ss * 6}deg)`; 
+   
     
     let hour = document.querySelector('#hour');
     let minutes = document.querySelector('#minutes');
